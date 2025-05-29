@@ -1,7 +1,7 @@
-import { BasePage } from './base-page';
+import { BasePage } from "./base-page";
 
 export class TopPage extends BasePage {
   async clickLoginButton() {
-    await this.clickButtonByRoleName('ログイン');
+    await this.clickButtonByRoleName("ログイン");
   }
 }

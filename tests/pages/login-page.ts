@@ -1,7 +1,7 @@
-import { BasePage } from './base-page';
+import { BasePage } from "./base-page";
 
 export class LoginPage extends BasePage {
   async clickLoginExecuteButton() {
-    await this.clickBySelector('#login-button');
+    await this.clickBySelector("#login-button");
   }
 }
