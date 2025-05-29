@@ -8,7 +8,6 @@ module.exports = {
         requireModule: ['ts-node/register'],        // TypeScript実行用の設定
         format: [
             'summary',
-            'html:reports/cucumber-report.html'     // テスト結果をHTMLファイルで出力する設定
         ],
     }
 }
