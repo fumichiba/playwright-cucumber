@@ -1,6 +1,7 @@
 
 # Playwright
 node_modules/
-/reports/
-/playwright-report/
-/test-results/
+reports/**
+!reports/.gitkeep
+playwright-report/
+test-results/
