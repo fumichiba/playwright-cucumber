@@ -1,4 +1,4 @@
-import { Page } from "@playwright/test";
+import { Page } from '@playwright/test';
 
 export class BasePage {
   constructor(protected page: Page) {}
@@ -20,7 +20,7 @@ export class BasePage {
 
   // ボタンをロール名でクリック
   async clickButtonByRoleName(name: string) {
-    await this.page.getByRole("button", { name }).click();
+    await this.page.getByRole('button', { name }).click();
   }
 
   // テキストが表示されるまで待つ（例: ログイン完了メッセージなど）
@@ -30,7 +30,7 @@ export class BasePage {
 
   // セレクタからテキストを取得
   async getText(selector: string): Promise<string> {
-    return (await this.page.textContent(selector)) || "";
+    return (await this.page.textContent(selector)) || '';
   }
 
   // スクリーンショットを取る
