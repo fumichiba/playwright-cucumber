@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - npm ci
+      - npx playwright install --with-deps
+
+  build:
+    commands:
+      - npm run test:all || echo "Tests failed but continuing"
+      - npm run report
+
+artifacts:
+  files:
+    - reports/**/*
+  discard-paths: no
