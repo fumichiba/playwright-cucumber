@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "cucumber-js --format html:reports/report.html",
-    "test:chromium": "cross-env BROWSER=chromium cucumber-js --format json:reports/json/chromium.json",
-    "test:firefox": "cross-env BROWSER=firefox cucumber-js --format json:reports/json/firefox.json",
-    "test:webkit": "cross-env BROWSER=webkit cucumber-js --format json:reports/json/webkit.json",
-    "test:all": "npm-run-all --parallel test:chromium test:firefox test:webkit",
+    "test:chromium": "cross-env BROWSER=chromium cucumber-js --profile chromium",
+    "test:firefox": "cross-env BROWSER=firefox cucumber-js --profile firefox",
+    "test:webkit": "cross-env BROWSER=webkit cucumber-js --profile webkit",
+    "test:all": "npm-run-all --sequential --continue-on-error test:chromium test:firefox test:webkit",
     "report": "ts-node generate-report.ts"
   },
   "keywords": [],
