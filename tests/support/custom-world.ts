@@ -29,9 +29,30 @@ export class CustomWorld extends World {
   }
 
   async close() {
-    await this.page?.close();
-    await this.context?.close();
-    await this.browser?.close();
+    // const browserType = process.env.BROWSER || 'chromium';
+    // switch (browserType) {
+    //   case 'firefox':
+    //     console.log('Closing Firefox browser');
+    //     break;
+    //   case 'webkit':
+    //     console.log('Closing WebKit browser');
+    //     break;
+    //   default:
+    //     console.log('Closing Chromium browser');
+    //     break;
+    // }
+
+    if (this.page && !this.page.isClosed()) {
+      await this.page.close();
+    }
+
+    if (this.context) {
+      await this.context.close();
+    }
+
+    if (this.browser && this.browser.isConnected()) {
+      await this.browser.close();
+    }
   }
 }
 

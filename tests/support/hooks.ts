@@ -13,5 +13,6 @@ After(async function (this: CustomWorld, scenario) {
     const screenshot = await this.page.screenshot({ type: 'png' });
     this.attach(screenshot, 'image/png');
   }
+
   await this.close(); // cleanup
 });

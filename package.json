@@ -8,7 +8,7 @@
     "test:chromium": "cross-env BROWSER=chromium cucumber-js --profile chromium",
     "test:firefox": "cross-env BROWSER=firefox cucumber-js --profile firefox",
     "test:webkit": "cross-env BROWSER=webkit cucumber-js --profile webkit",
-    "test:all": "npm-run-all --sequential --continue-on-error test:chromium test:firefox test:webkit",
+    "test:all": "ts-node run-tests.ts",
     "report": "ts-node generate-report.ts"
   },
   "keywords": [],
