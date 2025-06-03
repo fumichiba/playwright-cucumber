@@ -16,6 +16,6 @@ phases:
 
 artifacts:
   files:
-    - reports/**/*
+    # - reports/**/*
     - reports.zip
   discard-paths: no
