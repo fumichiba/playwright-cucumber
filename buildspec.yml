@@ -10,8 +10,9 @@ phases:
 
   build:
     commands:
-      - npm run test:all || echo "Tests failed but continuing"
+      - npm run test:all || true
       - npm run report
+      - zip -r reports.zip reports
 
 artifacts:
   files:
