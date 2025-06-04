@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { chromium, firefox, webkit } from 'playwright';
 import reporter from 'multiple-cucumber-html-reporter';
+import { execSync } from 'child_process';
 
 // 正規化：browser.name
 const normalizeBrowserName = (name: string): string => {
@@ -40,22 +41,44 @@ const getDeviceInfo = (): string => {
   return os.hostname() || 'Unknown Device';
 };
 
-const getPlatformVersion = (): string => {
-  const platform = os.platform().toLowerCase();
+// 人間が読めるOS名とバージョン
+const getHumanReadableOSInfo = (): { name: string; version: string } => {
+  const platform = os.platform();
 
-  if (platform === 'linux') {
-    try {
-      const content = fs.readFileSync('/etc/os-release', 'utf8');
-      const match = content.match(/VERSION_ID="(.+?)"/);
-      if (match) return match[1]; // 例: "22.04"
-    } catch {
-      // fallback
-      return os.release(); // カーネルバージョンを返す
+  try {
+    if (platform === 'win32') {
+      const caption = execSync('wmic os get Caption', { encoding: 'utf8' });
+      const match = caption.match(/Microsoft\s+(Windows\s+\d+)/i);
+      return {
+        name: 'windows',
+        version: match?.[1] || 'Windows',
+      };
     }
-  }
 
-  // MacやWindowsなどはos.release()で十分
-  return os.release();
+    if (platform === 'darwin') {
+      const version = execSync('sw_vers -productVersion', { encoding: 'utf8' }).trim();
+      return {
+        name: 'osx',
+        version,
+      };
+    }
+
+    if (platform === 'linux') {
+      const osRelease = execSync('cat /etc/os-release', { encoding: 'utf8' });
+      const prettyName = osRelease.match(/^PRETTY_NAME="(.+?)"$/m)?.[1];
+      const distro = prettyName?.toLowerCase() || '';
+      const isUbuntu = distro.includes('ubuntu');
+
+      return {
+        name: isUbuntu ? 'ubuntu' : 'linux',
+        version: prettyName || os.release(),
+      };
+    }
+
+    return { name: 'unknown', version: os.release() };
+  } catch (e) {
+    return { name: 'unknown', version: os.release() };
+  }
 };
 
 const jsonDir = path.resolve('reports/json');
@@ -69,11 +92,11 @@ const browserFiles = [
 ];
 
 (async () => {
-  // ディレクトリ作成（なければ）
   if (!fs.existsSync(mergedJsonDir)) {
     fs.mkdirSync(mergedJsonDir, { recursive: true });
   }
 
+  const osInfo = getHumanReadableOSInfo();
   let mergedFeatures: any[] = [];
 
   for (const { file, browser, launcher } of browserFiles) {
@@ -83,7 +106,6 @@ const browserFiles = [
       continue;
     }
 
-    // Playwright からバージョン取得
     let browserVersion = 'unknown';
     try {
       const instance = await launcher.launch();
@@ -104,8 +126,8 @@ const browserFiles = [
         },
         device: getDeviceInfo(),
         platform: {
-          name: normalizePlatformName(os.platform()),
-          version: getPlatformVersion(),
+          name: osInfo.name,
+          version: osInfo.version,
         },
       };
     }
@@ -113,10 +135,8 @@ const browserFiles = [
     mergedFeatures = mergedFeatures.concat(features);
   }
 
-  // 保存
   fs.writeFileSync(mergedJsonPath, JSON.stringify(mergedFeatures, null, 2));
 
-  // レポート生成
   reporter.generate({
     jsonDir: mergedJsonDir,
     reportPath: 'reports/html',
