@@ -31,14 +31,29 @@ const getDeviceInfo = (): string => {
   const platform = os.platform().toLowerCase();
   const release = os.release().toLowerCase();
 
+  const hostname = os.hostname().toLowerCase();
+
   if (platform === 'linux' && release.includes('microsoft')) {
     return 'WSL / Virtual Machine';
-  } else if (platform === 'darwin') {
+  }
+
+  // GitHub Actions ホスト名（例: fv-az...）
+  if (hostname.startsWith('fv-az')) {
+    return 'GitHub Actions / Virtual Machine';
+  }
+
+  // CodeBuild コンテナID（例: 3c28ddcca9fc）
+  if (/^[0-9a-f]{12}$/.test(hostname)) {
+    return 'AWS CodeBuild / Docker Container';
+  }
+
+  if (platform === 'darwin') {
     return 'MacBook / iMac';
   } else if (platform === 'win32') {
     return 'Windows PC';
   }
-  return os.hostname() || 'Unknown Device';
+
+  return 'Unknown Device';
 };
 
 // 人間が読めるOS名とバージョン
