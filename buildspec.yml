@@ -10,12 +10,17 @@ phases:
 
   build:
     commands:
-      - npm run test:all || true
-      - npm run report
+      - npm run ci
       - zip -r reports.zip reports
 
 artifacts:
   files:
-    # - reports/**/*
+    - reports/**/*
     - reports.zip
   discard-paths: no
+
+reports:
+  cucumber-test-report:
+    files:
+      - reports/json/merged/merged.json # ← CodeBuildがここを読んでレポート化
+    file-format: CUCUMBERJSON

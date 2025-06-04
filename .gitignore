@@ -4,5 +4,6 @@ node_modules/
 reports/**
 !reports/html/
 !reports/json/
+screenshots/
 playwright-report/
 test-results/
