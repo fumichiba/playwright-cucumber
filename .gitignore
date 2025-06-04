@@ -2,6 +2,7 @@
 # Playwright
 node_modules/
 reports/**
-!reports/.gitkeep
+!reports/html/
+!reports/json/
 playwright-report/
 test-results/

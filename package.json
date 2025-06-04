@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js --format html:reports/report.html",
     "test:chromium": "cross-env BROWSER=chromium cucumber-js --profile chromium",
     "test:firefox": "cross-env BROWSER=firefox cucumber-js --profile firefox",
     "test:webkit": "cross-env BROWSER=webkit cucumber-js --profile webkit",
