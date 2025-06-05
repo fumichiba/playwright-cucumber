@@ -21,6 +21,7 @@ artifacts:
   files:
     - reports/**/*
     - reports.zip
+    - screenshots/**/*
   discard-paths: no
 
 reports:
