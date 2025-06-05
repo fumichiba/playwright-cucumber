@@ -10,6 +10,4 @@ try {
   execSync(command, { stdio: 'inherit' });
 } catch (e) {
   console.warn('テストの一部が失敗しました。');
-  // プロセス全体は成功終了として扱う
-  process.exit(0);
 }
