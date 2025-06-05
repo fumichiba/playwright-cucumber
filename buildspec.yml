@@ -1,5 +1,9 @@
 version: 0.2
 
+env:
+  variables:
+    CI: 'true'
+
 phases:
   install:
     runtime-versions:
@@ -24,3 +28,4 @@ reports:
     files:
       - reports/json/merged/merged.json # ← CodeBuildがここを読んでレポート化
     file-format: CUCUMBERJSON
+    base-directory: reports/json/merged
