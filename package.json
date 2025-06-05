@@ -10,7 +10,7 @@
     "test:webkit": "cross-env BROWSER=webkit cucumber-js --profile webkit",
     "test:all": "ts-node run-tests.ts",
     "report": "ts-node generate-report.ts",
-    "ci": "npm run prepare:test && npm run test:all && npm run report"
+    "ci": "npm run prepare:test && npm run test:all"
   },
   "keywords": [],
   "author": "",
