@@ -10,8 +10,8 @@ Feature: ユーザーログイン
     And ランクが "<rank>" であること
 
     Examples:
-      | url                                         | email               | password  | username   | rank           |
-      | https://hotel-example-site.takeyaqa.dev/ja/ | ichiro@example.com  | password  | 山田一郎   | プレミアム会員 |
-      | https://hotel-example-site.takeyaqa.dev/ja/ | sakura@example.com  | pass1234  | 松本さくら | 一般会員       |
-      | https://hotel-example-site.takeyaqa.dev/ja/ | jun@example.com     | pa55w0rd! | 林潤       | プレミアム会員 |
-      | https://hotel-example-site.takeyaqa.dev/ja/ | yoshiki@example.com | pass-pass | 木村良樹   | 一般会員       |
+      | url                                         | email               | password  | username   | rank                 |
+      | https://hotel-example-site.takeyaqa.dev/ja/ | ichiro@example.com  | password  | 山田一郎   | プレミアム会員(失敗) |
+      | https://hotel-example-site.takeyaqa.dev/ja/ | sakura@example.com  | pass1234  | 松本さくら | 一般会員             |
+      | https://hotel-example-site.takeyaqa.dev/ja/ | jun@example.com     | pa55w0rd! | 林潤       | プレミアム会員       |
+      | https://hotel-example-site.takeyaqa.dev/ja/ | yoshiki@example.com | pass-pass | 木村良樹   | 一般会員             |
