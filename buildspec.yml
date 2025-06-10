@@ -9,8 +9,29 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
+      # 必要なシステム依存をyumでインストール（GUIなど）
+      - yum install -y \
+        alsa-lib \
+        atk \
+        cups-libs \
+        gtk3 \
+        libXcomposite \
+        libXcursor \
+        libXdamage \
+        libXext \
+        libXi \
+        libXrandr \
+        libXScrnSaver \
+        libXtst \
+        pango \
+        xorg-x11-fonts-100dpi \
+        xorg-x11-fonts-75dpi \
+        xorg-x11-fonts-Type1 \
+        xorg-x11-utils \
+        xorg-x11-server-Xvfb \
+        libX11-xcb
       - npm ci
-      - npx playwright install --with-deps
+      - npx playwright install # --with-deps は使わない
 
   build:
     commands:
@@ -27,5 +48,5 @@ artifacts:
 reports:
   cucumber-test-report:
     files:
-      - reports/json/merged/merged.json # ← CodeBuildがここを読んでレポート化
+      - reports/json/merged/merged.json
     file-format: CUCUMBERJSON
