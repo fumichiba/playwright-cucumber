@@ -9,29 +9,6 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
-      - echo "Using Amazon Linux 2023 base image"
-      - dnf install -y glibc-langpack-en # ロケール対策（localeエラー防止）
-      - dnf install -y \
-        at-spi2-atk \
-        at-spi2-core \
-        cups-libs \
-        gtk3 \
-        libXcomposite \
-        libXcursor \
-        libXdamage \
-        libXext \
-        libXi \
-        libXrandr \
-        libXScrnSaver \
-        libXtst \
-        pango \
-        xorg-x11-server-Xvfb \
-        libX11-xcb \
-        libdrm \
-        libgbm \
-        alsa-lib \
-        nss \
-        ipa-gothic-fonts
       - npm ci
       - npx playwright install --with-deps
 
@@ -50,5 +27,5 @@ artifacts:
 reports:
   cucumber-test-report:
     files:
-      - reports/json/merged/merged.json
+      - reports/json/merged/merged.json # ← CodeBuildがここを読んでレポート化
     file-format: CUCUMBERJSON
