@@ -9,10 +9,11 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
-      # 必要なシステム依存をyumでインストール（GUIなど）
-      - yum install -y \
-        alsa-lib \
-        atk \
+      - echo "Using Amazon Linux 2023 base image"
+      - dnf install -y glibc-langpack-en # ロケール対策（localeエラー防止）
+      - dnf install -y \
+        at-spi2-atk \
+        at-spi2-core \
         cups-libs \
         gtk3 \
         libXcomposite \
@@ -24,14 +25,15 @@ phases:
         libXScrnSaver \
         libXtst \
         pango \
-        xorg-x11-fonts-100dpi \
-        xorg-x11-fonts-75dpi \
-        xorg-x11-fonts-Type1 \
-        xorg-x11-utils \
         xorg-x11-server-Xvfb \
-        libX11-xcb
+        libX11-xcb \
+        libdrm \
+        libgbm \
+        alsa-lib \
+        nss \
+        ipa-gothic-fonts
       - npm ci
-      - npx playwright install # --with-deps は使わない
+      - npx playwright install --with-deps
 
   build:
     commands:
