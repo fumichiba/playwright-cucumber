@@ -1,6 +1,10 @@
 import { execSync } from 'child_process';
 
 const isCI = process.env.CI === 'true';
+const tags = process.env.TAGS || '@default';
+
+// 環境変数に渡す
+process.env.TAGS = tags;
 
 const command = isCI
   ? 'npm-run-all --sequential --continue-on-error test:chromium test:firefox test:webkit'

@@ -9,6 +9,18 @@ Feature: ユーザーログイン
     Then ユーザーネームが "<username>" であること
     And ランクが "<rank>" であること
 
+    @smoke
+    Examples:
+      | url                                         | email              | password | username | rank           |
+      | https://hotel-example-site.takeyaqa.dev/ja/ | ichiro@example.com | password | 山田一郎 | プレミアム会員 |
+
+    @regression
+    Examples:
+      | url                                         | email              | password | username   | rank           |
+      | https://hotel-example-site.takeyaqa.dev/ja/ | ichiro@example.com | password | 山田一郎   | プレミアム会員 |
+      | https://hotel-example-site.takeyaqa.dev/ja/ | sakura@example.com | pass1234 | 松本さくら | 一般会員       |
+
+    @default @uat
     Examples:
       | url                                         | email               | password  | username   | rank           |
       | https://hotel-example-site.takeyaqa.dev/ja/ | ichiro@example.com  | password  | 山田一郎   | プレミアム会員 |
