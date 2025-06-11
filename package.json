@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "prepare:test": "ts-node scripts/prepare.ts",
-    "test:chromium": "cross-env-shell BROWSER=chromium TAGS=${TAGS:-@default} 'cucumber-js --profile chromium ${TAGS:+--tags \"$TAGS\"}'",
-    "test:firefox": "cross-env-shell BROWSER=firefox TAGS=${TAGS:-@default} 'cucumber-js --profile firefox ${TAGS:+--tags \"$TAGS\"}'",
-    "test:webkit": "cross-env-shell BROWSER=webkit TAGS=${TAGS:-@default} 'cucumber-js --profile webkit ${TAGS:+--tags \"$TAGS\"}'",
+    "test:chromium": "cross-env-shell BROWSER=chromium TAGS=${TAGS:-'not @smoke and not @regression'} 'cucumber-js --profile chromium ${TAGS:+--tags \"$TAGS\"}'",
+    "test:firefox": "cross-env-shell BROWSER=firefox TAGS=${TAGS:-'not @smoke and not @regression'} 'cucumber-js --profile firefox ${TAGS:+--tags \"$TAGS\"}'",
+    "test:webkit": "cross-env-shell BROWSER=webkit TAGS=${TAGS:-'not @smoke and not @regression'} 'cucumber-js --profile webkit ${TAGS:+--tags \"$TAGS\"}'",
     "test:all": "ts-node run-tests.ts",
     "report": "ts-node generate-report.ts",
     "ci": "npm run prepare:test && npm run test:all"
