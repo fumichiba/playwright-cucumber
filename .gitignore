@@ -1,9 +1,8 @@
 
 # Playwright
 node_modules/
-playwright-report/**
+playwright-reports/**
 playwright-results/**
-playwright-tests/**
 reports/**
 !reports/html/
 !reports/json/
