@@ -5,7 +5,8 @@ export class BasePage {
 
   // 指定のURLに遷移
   async navigateTo(url: string): Promise<void> {
-    await this.page.goto(url);
+    // どんなページにも対応できるよう、networkidleまで待つ
+    await this.page.goto(url, { waitUntil: 'networkidle' });
   }
 
   // ラベルで入力フィールドを特定して入力
